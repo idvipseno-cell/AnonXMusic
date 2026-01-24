@@ -1,7 +1,7 @@
-# Copyright (c) 2025 AnonymousX1025
-# Licensed under the MIT License.
-# This file is part of AnonXMusic
-
+# Copyright (c) 2026 @YourUsername
+# جميع الحقوق محفوظة
+# بوت الموسيقى العربي - تطوير [اسمك]
+# القناة: @senovip | المطور: @idseno
 
 import time
 import logging
