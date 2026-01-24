@@ -44,3 +44,5 @@ class Config:
         ]
         if missing:
             raise SystemExit(f"Missing required environment variables: {', '.join(missing)}")
+# اللغة الافتراضية
+LANGUAGE = "ar"  # غيّرها من en إلى ar
