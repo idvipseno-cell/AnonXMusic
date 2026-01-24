@@ -122,3 +122,42 @@ if config.AUTO_LEAVE:
     tasks.append(asyncio.create_task(auto_leave()))
 tasks.append(asyncio.create_task(track_time()))
 tasks.append(asyncio.create_task(update_timer()))
+from pyrogram import filters
+from pyrogram.types import Message
+from anony import app
+
+@app.on_message(filters.command("commands") & filters.group)
+async def commands_list(client, message: Message):
+    """عرض قائمة الأوامر المختصرة"""
+    
+    commands_text = """
+📚 **الأوامر المختصرة (بدون رموز)**
+
+🎵 **التشغيل:**
+- شغل [اسم الأغنية]
+- تشغيل [اسم الأغنية]
+- play [song name]
+
+⏬ **التحميل:**
+- تنزيل [اسم الأغنية]
+- حمل [اسم الأغنية]
+- download [song name]
+
+⏯ **التحكم:**
+- وقف - إيقاف مؤقت
+- كمل - استئناف
+- تخطي - التالي
+- إيقاف - إيقاف كامل
+
+📝 **القوائم:**
+- القائمة - عرض قائمة الانتظار
+- عشوائي - خلط القائمة
+
+━━━━━━━━━━━━━━━
+💡 **جميع الأوامر بدون / أو .**
+━━━━━━━━━━━━━━━
+👨‍💻 المطور: @idseno
+📢 القناة: @senovip
+    """
+    
+    await message.reply(commands_text)
