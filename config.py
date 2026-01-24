@@ -1,48 +1,53 @@
+import os
 from os import getenv
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# معلومات المطور (غيّرها لمعلوماتك)
+OWNER = getenv("OWNER", "idseno")  # معرفك بدون @
+OWNER_ID = int(getenv("OWNER_ID", "641799099"))  # معرفك الرقمي
+
+# الدعم
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "senovip")  # قناتك بدون @
+SUPPORT_GROUP = getenv("SUPPORT_GROUP", "Sourceseno")  # مجموعتك بدون @
+
+# معلومات البوت
+BOT_NAME = getenv("BOT_NAME", "سورس ميوزك سينو")
+BOT_USERNAME = getenv("BOT_USERNAME", "SenoMusicbot")  # بدون @
+
+# باقي الإعدادات...
+API_ID = int(getenv("API_ID", "0"))
+API_HASH = getenv("API_HASH", "")
+BOT_TOKEN = getenv("BOT_TOKEN", "")
+MONGO_DB_URI = getenv("MONGO_DB_URI", "")
+STRING_SESSION = getenv("STRING_SESSION", "")
+LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", "0"))
+
+# اللغة الافتراضية
+LANGUAGE = getenv("LANGUAGE", "ar")
+
 class Config:
     def __init__(self):
-        self.API_ID = int(getenv("API_ID", 0))
-        self.API_HASH = getenv("API_HASH")
-
-        self.BOT_TOKEN = getenv("BOT_TOKEN")
-        self.MONGO_URL = getenv("MONGO_URL")
-
-        self.LOGGER_ID = int(getenv("LOGGER_ID", 0))
-        self.OWNER_ID = int(getenv("OWNER_ID", 0))
-
-        self.DURATION_LIMIT = int(getenv("DURATION_LIMIT", 60)) * 60
-        self.QUEUE_LIMIT = int(getenv("QUEUE_LIMIT", 20))
-        self.PLAYLIST_LIMIT = int(getenv("PLAYLIST_LIMIT", 20))
-
-        self.SESSION1 = getenv("SESSION", None)
-        self.SESSION2 = getenv("SESSION2", None)
-        self.SESSION3 = getenv("SESSION3", None)
-
-        self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/FallenAssociation")
-        self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/DevilsHeavenMF")
-
-        self.AUTO_END: bool = getenv("AUTO_END", False)
-        self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", False)
-        self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", True)
-        self.COOKIES_URL = [
-            url for url in getenv("COOKIES_URL", "").split(" ")
-            if url and "batbin.me" in url
-        ]
-        self.DEFAULT_THUMB = getenv("DEFAULT_THUMB", "https://te.legra.ph/file/3e40a408286d4eda24191.jpg")
-        self.PING_IMG = getenv("PING_IMG", "https://files.catbox.moe/haagg2.png")
-        self.START_IMG = getenv("START_IMG", "https://files.catbox.moe/zvziwk.jpg")
-
+        self.API_ID = API_ID
+        self.API_HASH = API_HASH
+        self.BOT_TOKEN = BOT_TOKEN
+        self.MONGO_DB_URI = MONGO_DB_URI
+        self.STRING_SESSION = STRING_SESSION
+        self.OWNER_ID = OWNER_ID
+        self.LOG_GROUP_ID = LOG_GROUP_ID
+        
     def check(self):
-        missing = [
-            var
-            for var in ["API_ID", "API_HASH", "BOT_TOKEN", "MONGO_URL", "LOGGER_ID", "OWNER_ID", "SESSION1"]
-            if not getattr(self, var)
-        ]
-        if missing:
-            raise SystemExit(f"Missing required environment variables: {', '.join(missing)}")
-# اللغة الافتراضية
-LANGUAGE = "ar"  # غيّرها من en إلى ar
+        """التحقق من المتغيرات المطلوبة"""
+        if not self.API_ID:
+            raise ValueError("API_ID مطلوب!")
+        if not self.API_HASH:
+            raise ValueError("API_HASH مطلوب!")
+        if not self.BOT_TOKEN:
+            raise ValueError("BOT_TOKEN مطلوب!")
+        if not self.MONGO_DB_URI:
+            raise ValueError("MONGO_DB_URI مطلوب!")
+        if not self.STRING_SESSION:
+            raise ValueError("STRING_SESSION مطلوب!")
+        if not self.OWNER_ID:
+            raise ValueError("OWNER_ID مطلوب!")
