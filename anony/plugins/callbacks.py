@@ -169,3 +169,20 @@ async def _settings_cb(_, query: types.CallbackQuery):
             chat_id,
         )
     )
+from pyrogram import filters
+from pyrogram.types import CallbackQuery
+from anony import app
+
+@app.on_callback_query(filters.regex("^close$"))
+async def close_callback(client, callback_query: CallbackQuery):
+    """إغلاق الرسالة"""
+    try:
+        await callback_query.message.delete()
+    except:
+        await callback_query.answer("❌ لا يمكن حذف هذه الرسالة!", show_alert=True)
+
+@app.on_callback_query(filters.regex("^refresh$"))
+async def refresh_callback(client, callback_query: CallbackQuery):
+    """تحديث المعلومات"""
+    await callback_query.answer("🔄 جاري التحديث...", show_alert=False)
+    # يمكنك إضافة كود التحديث هنا
