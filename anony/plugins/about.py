@@ -1,6 +1,6 @@
 from pyrogram import filters
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
-from AnonXMusic import app
+from anony import app
 
 ABOUT_TEXT = """
 🤖 **معلومات البوت**
