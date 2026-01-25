@@ -198,3 +198,4 @@ START_IMG = config.START_IMG
 
 # الكوكيز
 COOKIES_URL = config.COOKIES_URL
+AUDIO_QUALITY = "128k" 
