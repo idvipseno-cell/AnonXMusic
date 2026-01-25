@@ -2,18 +2,15 @@ from pyrogram import filters
 from pyrogram.types import Message
 from anony import app
 
-# ═══════════════════════════════════════════════════════════
 # نظام الأوامر العربية بدون رموز
-# المطور: @idseno | القناة: @senovip
-# ═══════════════════════════════════════════════════════════
+# المطور: @idseno
 
-# الكلمات المفتاحية
-PLAY_KEYWORDS = ["شغل", "تشغيل", "ابدي", "بلاي", "شغلي"]
-PAUSE_KEYWORDS = ["وقف", "اوكف", "بوز", "توقف"]
-RESUME_KEYWORDS = ["كمل", "resume", "استمر", "واصل"]
-SKIP_KEYWORDS = ["تخطي", "skip", "التالي", "next"]
-STOP_KEYWORDS = ["إيقاف", "stop", "ستوب", "اطفي"]
-QUEUE_KEYWORDS = ["القائمة", "queue", "الطابور"]
+PLAY_KEYWORDS = ["شغل", "تشغيل", "play", "بلاي"]
+PAUSE_KEYWORDS = ["وقف", "اوكف", "توقف"]
+RESUME_KEYWORDS = ["كمل", "resume", "استمر"]
+SKIP_KEYWORDS = ["تخطي", "skip", "التالي"]
+STOP_KEYWORDS = ["إيقاف", "stop", "اطفي"]
+QUEUE_KEYWORDS = ["القائمة", "queue"]
 
 def get_command(text: str):
     """استخراج الأمر من النص"""
@@ -61,7 +58,6 @@ def get_command(text: str):
     & ~filters.bot 
     & ~filters.via_bot
     & ~filters.forwarded
-    & ~filters.command(["start", "help", "settings", "ping", "play", "pause", "resume", "skip", "stop", "queue"])
 )
 async def arabic_commands_handler(client, message: Message):
     """معالج الأوامر العربية"""
@@ -69,46 +65,9 @@ async def arabic_commands_handler(client, message: Message):
     cmd, query = get_command(message.text)
     
     if cmd:
-        # تحويل للأمر الأصلي
         if cmd == "play" and query:
             message.text = f"/play {query}"
             message.command = ["play", query]
         else:
             message.text = f"/{cmd}"
             message.command = [cmd]
-```
-
----
-
-## **2️⃣ حل مشكلة Health Check في Koyeb**
-
-### **في Koyeb:**
-
-**اذهب لـ:** Settings → Health checks
-
-**اختر واحد من:**
-
-### **خيار أ: تعطيل Health Check (الأسهل)**
-- احذف Health Check تماماً
-- أو اجعله **Disabled**
-
-### **خيار ب: تغيير الإعدادات**
-- **Type:** `HTTP`
-- **Path:** `/`
-- **Port:** `8080`
-- **Grace Period:** `300` seconds
-
----
-
-## **3️⃣ إصلاح مشكلة التحميل (YouTube Cookies)**
-
-### **لاحظت الخطأ:**
-```
-Cookies are missing; downloads might fail
-```
-
-### **الحل (اختياري):**
-
-**في Koyeb، أضف متغير:**
-```
-COOKIES_URL =https://batbin.me/recart
