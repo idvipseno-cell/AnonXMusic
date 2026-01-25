@@ -111,4 +111,4 @@ Cookies are missing; downloads might fail
 
 **في Koyeb، أضف متغير:**
 ```
-COOKIES_URL =
+COOKIES_URL =https://batbin.me/recart
